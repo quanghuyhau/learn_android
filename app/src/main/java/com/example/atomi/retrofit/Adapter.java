@@ -39,7 +39,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.headlines.setText(modelArrayList.get(position).getTitle());
         holder.mainews.setText(modelArrayList.get(position).getDescription());
-        holder.auther.setText(modelArrayList.get(position).getAuther());
+        holder.author.setText(modelArrayList.get(position).getAuthor());
         holder.pulishedat.setText(modelArrayList.get(position).getPublishedAt());
 
         Glide.with(context).load(modelArrayList.get(position).getUrlToImage()).into(holder.imageView);
@@ -52,7 +52,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView headlines, mainews, auther, pulishedat;
+        TextView headlines, mainews, author, pulishedat;
         ImageView imageView;
 
         public ViewHolder(@NonNull View itemView) {
@@ -61,7 +61,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
             headlines = itemView.findViewById(R.id.mianHealines_id);
             mainews = itemView.findViewById(R.id.newsdescription_id);
-            auther = itemView.findViewById(R.id.auther_id);
+            author = itemView.findViewById(R.id.author_id);
             pulishedat = itemView.findViewById(R.id.published_id);
             imageView = itemView.findViewById(R.id.news_image);
         }

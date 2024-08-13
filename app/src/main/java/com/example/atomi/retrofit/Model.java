@@ -1,14 +1,14 @@
 package com.example.atomi.retrofit;
 
 public class Model {
-    String auther,title,description,url,urlToImage,publishedAt;
+    String author,title,description,url,urlToImage,publishedAt;
 
-    public String getAuther() {
-        return auther;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setAuther(String auther) {
-        this.auther = auther;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getTitle() {
@@ -51,8 +51,8 @@ public class Model {
         this.publishedAt = publishedAt;
     }
 
-    public Model(String auther, String title, String description, String url, String urlToImage, String publishedAt) {
-        this.auther = auther;
+    public Model(String author, String title, String description, String url, String urlToImage, String publishedAt) {
+        this.author = author;
         this.title = title;
         this.description = description;
         this.url = url;
