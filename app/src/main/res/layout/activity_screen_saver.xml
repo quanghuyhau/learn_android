@@ -1,0 +1,106 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="76dp">
+
+                <ImageView
+                    android:layout_width="363dp"
+                    android:layout_height="370dp"
+                    android:src="@drawable/img_screen" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingLeft="42dp"
+                android:paddingTop="30dp"
+                android:paddingRight="43dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Discover Your            Dream Job here"
+                    android:textColor="#1F41BB"
+                    android:textSize="35sp"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="326dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="23dp"
+                android:paddingBottom="60dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Explore all the existing job roles based on your interest and study major"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/button_login"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/textview"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:text="Login"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/button_register"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/signup"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:layout_marginStart="30dp"
+                    android:padding="15dp"
+                    android:text="Register"
+                    android:textColor="#0A0A0A"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

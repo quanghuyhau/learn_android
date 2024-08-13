@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:layout_margin="2dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_margin="3dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:layout_margin="6dp"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/mianHealines_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="huyquangtrannnnnnnnnnnnnnnnnnnnn"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/newsdescription_id"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:maxLines="6"
+                    android:text="TextView" />
+
+                <ImageView
+                    android:id="@+id/news_image"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/logo_hau" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/auther_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Author"
+                android:textColor="#E30808" />
+
+            <TextView
+                android:id="@+id/published_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Published at"
+                android:textColor="#E30808" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
