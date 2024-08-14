@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tabs>
     <tab
-        drawable="@drawable/baseline_home_24"
+        drawable="@drawable/btn_nav1"
         text="@string/Home" />
 
     <tab
-        drawable="@drawable/baseline_science_24"
-        text="@string/Science" />
+        drawable="@drawable/btn_nav2"
+        text="@string/Request" />
 
     <tab
-        drawable="@drawable/baseline_sports_baseball_24"
-        text="@string/Sports" />
+        drawable="@drawable/btn_nav3"
+        text="@string/Product" />
 
     <tab
-        drawable="@drawable/baseline_favorite_24"
-        text="@string/Health" />
-
-    <tab
-        drawable="@drawable/baseline_library_music_24"
-        text="@string/Enter" />
+        drawable="@drawable/btn_nav4"
+        text="@string/User" />
 </tabs>

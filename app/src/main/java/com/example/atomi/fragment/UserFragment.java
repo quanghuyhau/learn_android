@@ -1,31 +1,46 @@
-package com.example.atomi.activity;
-
-import static android.content.ContentValues.TAG;
+package com.example.atomi.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
 import com.example.atomi.R;
+import com.example.atomi.activity.DataHome;
+import com.example.atomi.activity.LoginActivity;
+import com.example.atomi.activity.MyAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity {
+public class UserFragment extends Fragment {
     private RecyclerView recyclerView;
-
     private TextView buttonLogOut;
 
+    private FirebaseAuth Auth;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_user, container, false);
+
+
+        recyclerView = view.findViewById(R.id.recycleView_fra);
+        buttonLogOut = view.findViewById(R.id.button_logout_fra);
+
+
+
+        Auth = FirebaseAuth.getInstance();
+        TextView logoutButton = view.findViewById(R.id.button_logout_fra);
+
         List<DataHome> dataHomes = new ArrayList<>();
         dataHomes.add(new DataHome(DataHome.TYPE_HEADER, 0, "Thông tin tài khoản", ""));
         dataHomes.add(new DataHome(DataHome.TYPE_ITEM, R.drawable.ic_home1, "Thông tin cá nhân", "Xem chi tiết và chỉnh sửa thông tin tài khoản cá nhân"));
@@ -41,22 +56,23 @@ public class HomeActivity extends AppCompatActivity {
         dataHomes.add(new DataHome(DataHome.TYPE_ITEM,R.drawable.ic_home9,"Trung tâm hỗ trợ","Trả lời một số thắc mắc của bạn trong quá trình sử dụng dịch vụ"));
         dataHomes.add(new DataHome(DataHome.TYPE_ITEM,R.drawable.ic_home10,"Đánh giá","Chúng tôi mong muốn được nhận những đánh giá của quý khách để cải thiện"));
 
+        MyAdapter myAdapter = new MyAdapter(dataHomes);
+        recyclerView.setAdapter(myAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        buttonLogOut = findViewById(R.id.button_logout1);
-        recyclerView = findViewById(R.id.recycleView);
-
-        buttonLogOut.setOnClickListener(new View.OnClickListener() {
+        logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                Auth.signOut();
+
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-                Log.d(TAG, "Bạn đã đăng xuất thành công");
+
+                getActivity().finish();
             }
         });
 
-        MyAdapter myAdapter = new MyAdapter(dataHomes);
-        recyclerView.setAdapter(myAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        return view;
     }
 }
