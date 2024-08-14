@@ -102,7 +102,6 @@
                 android:gravity="center"
                 android:paddingBottom="20dp"
                 android:text="Đăng nhập bằng phương thức khác"
-                android:textColor="#1F41BB"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 

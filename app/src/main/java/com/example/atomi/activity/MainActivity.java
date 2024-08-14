@@ -85,9 +85,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        //product
-         productFragment = new ProductFragment();
-         loadFragment(productFragment);
+//        //product
+//         productFragment = new ProductFragment();
+//         loadFragment(productFragment);
     }
     private void loadFragment(Fragment productFragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
