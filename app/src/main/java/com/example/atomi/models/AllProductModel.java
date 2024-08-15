@@ -1,6 +1,8 @@
 package com.example.atomi.models;
 
-public class AllProductModel {
+import java.io.Serializable;
+
+public class AllProductModel implements Serializable {
     String image;
     String description;
     String name;

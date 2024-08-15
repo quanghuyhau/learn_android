@@ -1,6 +1,7 @@
 package com.example.atomi.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.atomi.R;
+import com.example.atomi.activity.DetailedActivity;
 import com.example.atomi.models.NewsProductModel;
 
 import java.util.List;
@@ -36,6 +38,15 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.Vi
         Glide.with(context).load(list.get(position).getImage()).into(holder.newImg);
         holder.newName.setText(list.get(position).getName());
         holder.newPrice.setText(String.valueOf(list.get(position).getPrice()));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailedActivity.class);
+                intent.putExtra("detailed",list.get(position));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

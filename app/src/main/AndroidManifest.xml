@@ -14,12 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Atomi"
         tools:targetApi="31">
-
-
-
-<!--        <activity-->
-<!--            android:name=".retrofit.ReadNewsActivity"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".activity.DetailedActivity"
+            android:exported="false" />
+        <!-- <activity -->
+        <!-- android:name=".retrofit.ReadNewsActivity" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".activity.NewsActivity"
             android:exported="false" />
