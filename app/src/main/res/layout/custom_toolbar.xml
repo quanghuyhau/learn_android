@@ -1,0 +1,73 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_root"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/white"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp">
+
+    <FrameLayout
+        android:id="@+id/fl_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:paddingTop="10dp"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:src="@drawable/ic_back"
+            app:tint="@color/black"
+            tools:ignore="ContentDescription" />
+    </FrameLayout>
+
+    <TextView
+        android:text="abc"
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_toStartOf="@id/fl_close"
+        android:layout_toEndOf="@id/fl_back"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/fl_close"
+        app:layout_constraintStart_toEndOf="@id/fl_back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginEnd="5dp"
+        app:layout_goneMarginStart="35dp"
+        tools:ignore="RtlHardcoded" />
+
+    <FrameLayout
+        android:id="@+id/fl_close"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="3dp"
+            android:padding="8dp"
+            android:src="@drawable/shopping_cart"
+            app:tint="@color/black"
+            tools:ignore="ContentDescription" />
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,5 +6,8 @@
     <color name="title">#0E121B</color>
     <color name="subTitle">#717784</color>
     <color name="error">#FB3748</color>
-    <color name="backgroundError">#FFEBEC</color>
+    <color name="primary">#1F3BAD</color>
+    <color name="a">#F5F7FA</color>
+
+
 </resources>

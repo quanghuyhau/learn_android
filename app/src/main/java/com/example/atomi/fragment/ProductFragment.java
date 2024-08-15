@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,9 +17,13 @@ import android.widget.Toast;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.example.atomi.CustomToolBar;
 import com.example.atomi.R;
+import com.example.atomi.activity.LoginActivity;
+import com.example.atomi.adapter.AllProductAdapter;
 import com.example.atomi.adapter.CategoryAdapter;
 import com.example.atomi.adapter.NewProductAdapter;
+import com.example.atomi.models.AllProductModel;
 import com.example.atomi.models.CategoryModel;
 import com.example.atomi.models.NewsProductModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,14 +39,18 @@ import java.util.List;
 
 public class ProductFragment extends Fragment {
 
-    RecyclerView catRecyclerView,newProductRecycleView;
+    RecyclerView catRecyclerView,newProductRecycleView,allProductRecycleView;
     CategoryAdapter categoryAdapter;
     List<CategoryModel> categoryModelList;
 
     NewProductAdapter newProductAdapter;
     List<NewsProductModel> newsProductModelList;
 
+    AllProductAdapter allProductAdapter;
+    List<AllProductModel> allProductModelList;
+
     FirebaseFirestore db;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,6 +59,26 @@ public class ProductFragment extends Fragment {
 
         catRecyclerView = root.findViewById(R.id.rec_category);
         newProductRecycleView = root.findViewById(R.id.new_product_rec);
+        allProductRecycleView = root.findViewById(R.id.popular_rec);
+
+
+        CustomToolBar customToolBar = root.findViewById(R.id.custom_toolbar);
+
+        customToolBar.setTitle("Shop đồ thể thao");
+        customToolBar.setBgColor(R.color.primary);
+        customToolBar.setColorTitle(R.color.white);
+        customToolBar.setColorIvBack(R.color.white);
+        customToolBar.setOnBackClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getParentFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content, new UserFragment())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
 
         db = FirebaseFirestore.getInstance();
         ImageSlider imageSlider = root.findViewById(R.id.image_slider);
@@ -69,6 +99,7 @@ public class ProductFragment extends Fragment {
         categoryModelList = new ArrayList<>();
         categoryAdapter = new CategoryAdapter(getActivity(),categoryModelList);
         catRecyclerView.setAdapter(categoryAdapter);
+
 
         db.collection("Category")
                 .get()
@@ -103,6 +134,32 @@ public class ProductFragment extends Fragment {
                                 NewsProductModel newsProductModel = document.toObject(NewsProductModel.class);
                                 newsProductModelList.add(newsProductModel);
                                 newProductAdapter.notifyDataSetChanged();
+                            }
+                        } else {
+
+                            Toast.makeText(getActivity(), ""+task.getException(), Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+
+
+
+        allProductRecycleView.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        allProductModelList = new ArrayList<>();
+        allProductAdapter = new AllProductAdapter(getContext(),allProductModelList);
+        allProductRecycleView.setAdapter(allProductAdapter);
+        db.collection("AllProduct")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (QueryDocumentSnapshot document : task.getResult()){
+
+                                AllProductModel allProductModel = document.toObject(AllProductModel.class);
+                                allProductModelList.add(allProductModel);
+                                allProductAdapter.notifyDataSetChanged();
                             }
                         } else {
 
