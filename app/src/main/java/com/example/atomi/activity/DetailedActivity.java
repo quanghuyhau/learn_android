@@ -1,5 +1,6 @@
 package com.example.atomi.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -9,24 +10,40 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.atomi.R;
 import com.example.atomi.models.AllProductModel;
 import com.example.atomi.models.NewsProductModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class DetailedActivity extends AppCompatActivity {
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+
+public class  DetailedActivity extends AppCompatActivity {
+
 
     ImageView detailedImg;
-    TextView name,description,price;
+    TextView name, description, price,quantity;
     TextView rating;
-    Button addToCart,buyNow;
-    ImageView addItems,remoteItems;
+    Button addToCart, buyNow;
+    ImageView addItems, remoteItems;
+
+
+    int totalQuantity = 1;
+    int totalPrice = 0;
 
     NewsProductModel newsProductModel = null;
     AllProductModel allProductModel = null;
+
+    FirebaseAuth auth;
     private FirebaseFirestore fireStore;
 
     TextView seeMore;
@@ -38,18 +55,20 @@ public class DetailedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detailed);
 
         fireStore = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
 
         final Object obj = getIntent().getSerializableExtra("detailed");
-        if (obj instanceof NewsProductModel){
+        if (obj instanceof NewsProductModel) {
             newsProductModel = (NewsProductModel) obj;
         }
 
         final Object obj_two = getIntent().getSerializableExtra("detailed");
-        if (obj instanceof AllProductModel){
+        if (obj instanceof AllProductModel) {
             allProductModel = (AllProductModel) obj_two;
         }
 
         detailedImg = findViewById(R.id.detailed_img);
+        quantity = findViewById(R.id.quantity);
         rating = findViewById(R.id.text_detailed_rating);
         name = findViewById(R.id.detailed_name);
         description = findViewById(R.id.detailed_desciption);
@@ -60,13 +79,23 @@ public class DetailedActivity extends AppCompatActivity {
         remoteItems = findViewById(R.id.remote_item);
         seeMore = findViewById(R.id.detailed_see_more);
 
-        if (newsProductModel != null){
+        if (newsProductModel != null) {
             Glide.with(getApplicationContext()).load(newsProductModel.getImage()).into(detailedImg);
             name.setText(newsProductModel.getName());
             description.setText(newsProductModel.getDescription());
             price.setText(String.valueOf(newsProductModel.getPrice()));
             rating.setText(String.valueOf(newsProductModel.getRating()));
-//            rating.setRating(Float.parseFloat(newsProductModel.getRating()));
+
+
+            String priceString = newsProductModel.getPrice().replace(".", "");
+            try {
+                int price = Integer.parseInt(priceString);
+                totalPrice = price * totalQuantity;
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+
+
             description.post(new Runnable() {
                 @Override
                 public void run() {
@@ -80,13 +109,21 @@ public class DetailedActivity extends AppCompatActivity {
             });
 
         }
-        if (allProductModel != null){
+        if (allProductModel != null) {
             Glide.with(getApplicationContext()).load(allProductModel.getImage()).into(detailedImg);
             name.setText(allProductModel.getName());
             description.setText(allProductModel.getDescription());
             price.setText(String.valueOf(allProductModel.getPrice()));
             rating.setText(String.valueOf(allProductModel.getRating()));
-//            rating.setRating(Float.parseFloat(newsProductModel.getRating()));
+
+            String priceString = allProductModel.getPrice().replace(".", "");
+            try {
+                int price = Integer.parseInt(priceString);
+                totalPrice = price * totalQuantity;
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+
             description.post(new Runnable() {
                 @Override
                 public void run() {
@@ -118,6 +155,98 @@ public class DetailedActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addToCart();
+            }
+        });
+
+        addItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addItems();
+            }
+        });
+
+        remoteItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                remoteItems();
+            }
+        });
     }
 
+
+    private void addToCart() {
+        String saveCurrentTime, saveCurrentDate;
+
+        Calendar calForDate = Calendar.getInstance();
+
+        SimpleDateFormat currentDate = new SimpleDateFormat("MM dd, yyyy");
+        saveCurrentDate = currentDate.format(calForDate.getTime());
+
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+        saveCurrentTime = currentTime.format(calForDate.getTime());
+
+        final HashMap<String, Object> cartMap = new HashMap<>();
+
+        cartMap.put("productName", name.getText().toString());
+        cartMap.put("productPrice", price.getText().toString());
+        cartMap.put("productImage",detailedImg.toString());
+        cartMap.put("currentDate", saveCurrentDate);
+        cartMap.put("currentTime", saveCurrentTime);
+        cartMap.put("totalQuantity", quantity.getText().toString());
+        cartMap.put("totalPrice", totalPrice);
+
+
+        fireStore.collection("AddToCart").document(auth.getCurrentUser().getUid())
+                .collection("User").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                        Toast.makeText(DetailedActivity.this, "Thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                });
+
+
     }
+
+    private  void addItems(){
+        if (totalQuantity < 100 ){
+            totalQuantity++;
+            quantity.setText(String.valueOf(totalQuantity));
+
+            if (newsProductModel != null){
+                String priceString = newsProductModel.getPrice().replace(".", "");
+                try {
+                    int price = Integer.parseInt(priceString);
+                    totalPrice = price * totalQuantity;
+                } catch (NumberFormatException e) {
+            }
+        }
+            if (allProductModel != null){
+                String priceString = allProductModel.getPrice().replace(".", "");
+                try {
+                    int price = Integer.parseInt(priceString);
+                    totalPrice = price * totalQuantity;
+                } catch (NumberFormatException e){
+
+                }
+            }
+            Toast.makeText(DetailedActivity.this, "Đã thêm 1 sản phẩm", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private  void remoteItems(){
+        if(totalQuantity > 1){
+            totalQuantity--;
+            quantity.setText(String.valueOf(totalQuantity));
+
+            Toast.makeText(DetailedActivity.this, "Đã xóa 1 sản phẩm", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+}

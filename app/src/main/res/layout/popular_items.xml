@@ -19,6 +19,7 @@
             android:layout_marginTop="5dp"
             android:scaleType="centerCrop"
             android:src="@drawable/logo_hau"
+            android:paddingBottom="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -29,8 +30,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
+            android:paddingBottom="5dp"
             android:text="Tên sản phẩm"
-            android:textSize="17sp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,6 +41,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
+            android:paddingBottom="5dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="@+id/all_img"
             app:layout_constraintStart_toStartOf="@+id/all_img"
@@ -47,26 +51,27 @@
                 android:id="@+id/price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Giá: đ"
+                android:text="đ"
                 android:textColor="#673AB7"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintBottom_toBottomOf="@+id/all_price"
+                app:layout_constraintStart_toEndOf="@+id/all_price"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/all_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingRight="5dp"
                 android:text="90"
                 android:textColor="#673AB7"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/price"
-                app:layout_constraintStart_toEndOf="@+id/price"
-                app:layout_constraintTop_toTopOf="@+id/price" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+               />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

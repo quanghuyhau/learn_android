@@ -17,6 +17,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="8dp"
+            android:paddingBottom="5dp"
             android:scaleType="centerCrop"
             android:src="@drawable/logo_hau"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,8 +44,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
+            android:paddingBottom="5dp"
             android:text="Tên Sản Phẩm"
-            android:textSize="17sp"
+            android:textColor="@color/black"
+            android:textSize="19sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,22 +56,12 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
+            android:paddingBottom="5dp"
             app:layout_constraintEnd_toEndOf="@+id/new_product_name"
             app:layout_constraintStart_toStartOf="@+id/new_product_name"
             app:layout_constraintTop_toBottomOf="@+id/new_product_name">
 
-            <TextView
-                android:id="@+id/price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Giá: ₫"
-                android:textColor="#673AB7"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/new_price"
@@ -76,11 +69,25 @@
                 android:layout_height="wrap_content"
                 android:text="2,100,000"
                 android:textColor="#673AB7"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/price"
-                app:layout_constraintStart_toEndOf="@+id/price"
-                app:layout_constraintTop_toTopOf="@+id/price" />
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" ₫"
+                android:textColor="#673AB7"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/new_price"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@+id/new_price"
+                app:layout_constraintTop_toTopOf="@+id/new_price" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

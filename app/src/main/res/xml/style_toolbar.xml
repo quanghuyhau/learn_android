@@ -1,0 +1,5 @@
+<style name="ToolbarStyle" parent="Widget.MaterialComponents.Toolbar">
+    <item name="titleTextColor">@color/white</item>
+    <item name="android:iconTint">@color/white</item>
+    <item name="android:textColorPrimary">@color/white</item>
+</style>

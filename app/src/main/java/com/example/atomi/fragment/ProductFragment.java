@@ -1,5 +1,6 @@
 package com.example.atomi.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,9 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
@@ -20,6 +25,7 @@ import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.atomi.CustomToolBar;
 import com.example.atomi.R;
 import com.example.atomi.activity.LoginActivity;
+import com.example.atomi.activity.ShowAllActivity;
 import com.example.atomi.adapter.AllProductAdapter;
 import com.example.atomi.adapter.CategoryAdapter;
 import com.example.atomi.adapter.NewProductAdapter;
@@ -38,6 +44,10 @@ import java.util.List;
 
 
 public class ProductFragment extends Fragment {
+
+    Toolbar toolbar;
+
+    TextView catShowAll,allShowAll,newShowAll;
 
     RecyclerView catRecyclerView,newProductRecycleView,allProductRecycleView;
     CategoryAdapter categoryAdapter;
@@ -60,24 +70,55 @@ public class ProductFragment extends Fragment {
         catRecyclerView = root.findViewById(R.id.rec_category);
         newProductRecycleView = root.findViewById(R.id.new_product_rec);
         allProductRecycleView = root.findViewById(R.id.popular_rec);
+        catShowAll = root.findViewById(R.id.category_see_all);
+        allShowAll = root.findViewById(R.id.popular_see_all);
+        newShowAll = root.findViewById(R.id.newProducts_see_all);
 
 
-        CustomToolBar customToolBar = root.findViewById(R.id.custom_toolbar);
+        toolbar = root.findViewById(R.id.home_toolbar);
 
-        customToolBar.setTitle("Shop đồ thể thao");
-        customToolBar.setBgColor(R.color.primary);
-        customToolBar.setColorTitle(R.color.white);
-        customToolBar.setColorIvBack(R.color.white);
-        customToolBar.setOnBackClickListener(new View.OnClickListener() {
+        catShowAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fragmentManager = getParentFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.content, new UserFragment())
-                        .addToBackStack(null)
-                        .commit();
+                Intent itent = new Intent(getContext(), ShowAllActivity.class);
+                startActivity(itent);
             }
         });
+
+        newShowAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent itent = new Intent(getContext(), ShowAllActivity.class);
+                startActivity(itent);
+            }
+        });
+
+        allShowAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent itent = new Intent(getContext(), ShowAllActivity.class);
+                startActivity(itent);
+            }
+        });
+
+
+//        CustomToolBar customToolBar = root.findViewById(R.id.custom_toolbar);
+//
+//        customToolBar.setTitle("Shop đồ thể thao");
+//        customToolBar.setBgColor(R.color.primary);
+//        customToolBar.setColorTitle(R.color.white);
+//        customToolBar.setColorIvBack(R.color.white);
+//        customToolBar.setOnBackClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                FragmentManager fragmentManager = getParentFragmentManager();
+//                fragmentManager.beginTransaction()
+//                        .replace(R.id.content, new UserFragment())
+//                        .addToBackStack(null)
+//                        .commit();
+//            }
+//        });
+
 
 
         db = FirebaseFirestore.getInstance();
@@ -172,4 +213,6 @@ public class ProductFragment extends Fragment {
         return  root;
 
     }
+
+
 }

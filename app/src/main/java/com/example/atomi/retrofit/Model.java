@@ -60,3 +60,4 @@ public class Model {
         this.publishedAt = publishedAt;
     }
 }
+  
