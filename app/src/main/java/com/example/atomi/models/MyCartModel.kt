@@ -8,6 +8,7 @@ data class MyCartModel(
     var productName: String? = null,
     var productPrice: String? = null,
     var totalQuantity: String? = null,
-    var totalPrice: Int? = null
+    var totalPrice: Int? = null,
+    var productImage: String? = null
 )
 

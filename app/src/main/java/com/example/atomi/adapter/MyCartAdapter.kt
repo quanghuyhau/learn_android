@@ -5,9 +5,11 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.atomi.R
 import com.example.atomi.models.MyCartModel
 
@@ -24,6 +26,8 @@ class MyCartAdapter(private val context: Context, private val list: List<MyCartM
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
 
+
+        Glide.with(context).load(list[position].productImage).into(holder.image)
         holder.date.text = item.currentDate
         holder.time.text = item.currentTime
         holder.price.text = "${item.productPrice}đ"
@@ -44,6 +48,7 @@ class MyCartAdapter(private val context: Context, private val list: List<MyCartM
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val image: ImageView = itemView.findViewById(R.id.product_image)
         val name: TextView = itemView.findViewById(R.id.product_name)
         val price: TextView = itemView.findViewById(R.id.product_price)
         val date: TextView = itemView.findViewById(R.id.current_date)

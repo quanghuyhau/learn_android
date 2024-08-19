@@ -39,7 +39,7 @@
         android:background="@color/primary"
         android:gravity="center"
         android:padding="18dp"
-        android:text="Giá sản phẩm : 500.000đ"
+        android:text="Tổng đơn hàng : 500.000đ"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"

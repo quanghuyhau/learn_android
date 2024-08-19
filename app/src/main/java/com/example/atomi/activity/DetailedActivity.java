@@ -195,24 +195,26 @@ public class  DetailedActivity extends AppCompatActivity {
 
         cartMap.put("productName", name.getText().toString());
         cartMap.put("productPrice", price.getText().toString());
-        cartMap.put("productImage",detailedImg.toString());
+        cartMap.put("productImage", newsProductModel != null ? newsProductModel.getImage() : allProductModel.getImage()); // Lưu URL hình ảnh
         cartMap.put("currentDate", saveCurrentDate);
         cartMap.put("currentTime", saveCurrentTime);
         cartMap.put("totalQuantity", quantity.getText().toString());
         cartMap.put("totalPrice", totalPrice);
 
-
         fireStore.collection("AddToCart").document(auth.getCurrentUser().getUid())
                 .collection("User").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
-                        Toast.makeText(DetailedActivity.this, "Thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
-                        finish();
+                        if (task.isSuccessful()) {
+                            Toast.makeText(DetailedActivity.this, "Thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(DetailedActivity.this, "Lỗi khi thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
-
-
     }
+
 
     private  void addItems(){
         if (totalQuantity < 100 ){

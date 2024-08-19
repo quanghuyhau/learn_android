@@ -16,7 +16,6 @@ import com.example.atomi.adapter.MyCartAdapter
 import com.example.atomi.models.MyCartModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-
 class CartActivity : AppCompatActivity() {
 
     private var overAllTotalAmount: Int = 0
@@ -39,11 +38,6 @@ class CartActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        LocalBroadcastManager.getInstance(this).registerReceiver(
-            mMessageReceiver,
-            IntentFilter("MyTotalAmount")
-        )
-
         overAllAmount = findViewById(R.id.all_price)
         recyclerView = findViewById(R.id.cart_rec)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -55,21 +49,25 @@ class CartActivity : AppCompatActivity() {
             .collection("User").get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+                    overAllTotalAmount = 0
+                    cartModelList.clear()
                     task.result?.documents?.forEach { doc ->
                         val myCartModel = doc.toObject(MyCartModel::class.java)
                         myCartModel?.let {
                             cartModelList.add(it)
-                            cartAdapter.notifyDataSetChanged()
+                            overAllTotalAmount += it.totalPrice ?: 0
                         }
                     }
+                    cartAdapter.notifyDataSetChanged()
+                    overAllAmount.text = "Giá sản phẩm : $overAllTotalAmount đ"
                 }
             }
     }
 
-    private val mMessageReceiver: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            val totalBill = intent.getIntExtra("totalAmount", 0)
-            overAllAmount.text = "Giá sản phẩm : $totalBill đ"
-        }
-    }
+//    private val mMessageReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+//        override fun onReceive(context: Context, intent: Intent) {
+//            val totalBill = intent.getIntExtra("totalAmount", 0)
+//            overAllAmount.text = "Tổng đơn hàng : $totalBill đ"
+//        }
+//    }
 }
