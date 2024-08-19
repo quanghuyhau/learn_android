@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.example.atomi.R;
 import com.example.atomi.activity.DataHome;
 import com.example.atomi.activity.LoginActivity;
-import com.example.atomi.activity.MyAdapter;
+import com.example.atomi.adapter.MyAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;

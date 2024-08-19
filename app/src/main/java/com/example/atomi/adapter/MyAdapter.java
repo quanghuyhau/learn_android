@@ -1,4 +1,4 @@
-package com.example.atomi.activity;
+package com.example.atomi.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +11,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.atomi.R;
+import com.example.atomi.activity.DataHome;
 
 import java.util.List;
 

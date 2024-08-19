@@ -1,18 +1,26 @@
 package com.example.atomi.activity
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.atomi.R
 import com.example.atomi.adapter.MyCartAdapter
-import com.example.atomi.retrofit.MyCartModel
+import com.example.atomi.models.MyCartModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QuerySnapshot
 
 class CartActivity : AppCompatActivity() {
+
+    private var overAllTotalAmount: Int = 0
+    private lateinit var overAllAmount: TextView
     private lateinit var toolbar: Toolbar
     private lateinit var recyclerView: RecyclerView
     private lateinit var cartModelList: MutableList<MyCartModel>
@@ -31,19 +39,23 @@ class CartActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        LocalBroadcastManager.getInstance(this).registerReceiver(
+            mMessageReceiver,
+            IntentFilter("MyTotalAmount")
+        )
+
+        overAllAmount = findViewById(R.id.all_price)
         recyclerView = findViewById(R.id.cart_rec)
         recyclerView.layoutManager = LinearLayoutManager(this)
         cartModelList = mutableListOf()
         cartAdapter = MyCartAdapter(this, cartModelList)
         recyclerView.adapter = cartAdapter
 
-        firestore.collection("AddToCart")
-            .document(auth.currentUser?.uid ?: "")
-            .collection("User")
-            .get()
+        firestore.collection("AddToCart").document(auth.currentUser?.uid ?: "")
+            .collection("User").get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    for (doc in task.result?.documents ?: emptyList()) {
+                    task.result?.documents?.forEach { doc ->
                         val myCartModel = doc.toObject(MyCartModel::class.java)
                         myCartModel?.let {
                             cartModelList.add(it)
@@ -52,5 +64,12 @@ class CartActivity : AppCompatActivity() {
                     }
                 }
             }
+    }
+
+    private val mMessageReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val totalBill = intent.getIntExtra("totalAmount", 0)
+            overAllAmount.text = "Giá sản phẩm : $totalBill đ"
+        }
     }
 }

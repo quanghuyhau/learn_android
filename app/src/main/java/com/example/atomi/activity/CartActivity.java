@@ -1,6 +1,11 @@
 //package com.example.atomi.activity;
 //
+//import android.content.BroadcastReceiver;
+//import android.content.Context;
+//import android.content.Intent;
+//import android.content.IntentFilter;
 //import android.os.Bundle;
+//import android.widget.TextView;
 //
 //import androidx.activity.EdgeToEdge;
 //import androidx.annotation.NonNull;
@@ -9,12 +14,13 @@
 //import androidx.core.graphics.Insets;
 //import androidx.core.view.ViewCompat;
 //import androidx.core.view.WindowInsetsCompat;
+//import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 //import androidx.recyclerview.widget.LinearLayoutManager;
 //import androidx.recyclerview.widget.RecyclerView;
 //
 //import com.example.atomi.R;
 //import com.example.atomi.adapter.MyCartAdapter;
-//import com.example.atomi.retrofit.MyCartModel;
+//import com.example.atomi.models.MyCartModel;
 //import com.google.android.gms.tasks.OnCompleteListener;
 //import com.google.android.gms.tasks.Task;
 //import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +32,10 @@
 //import java.util.List;
 //
 //public class CartActivity extends AppCompatActivity {
+//
+//    int overAllTotalAmount;
+//
+//    TextView overAllAmount;
 //    Toolbar toolbar;
 //    RecyclerView recyclerView;
 //    List<MyCartModel> cartModelList;
@@ -46,6 +56,9 @@
 //        setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //
+//        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,new IntentFilter("MyTotalAmount"));
+//
+//        overAllAmount = findViewById(R.id.all_price);
 //        recyclerView = findViewById(R.id.cart_rec);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        cartModelList = new ArrayList<>();
@@ -66,7 +79,13 @@
 //                }
 //            }
 //        });
-//
-//
 //    }
+//    public BroadcastReceiver mMessageReceiver= new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//
+//            int totalBill = intent.getIntExtra("totalAmount",0);
+//            overAllAmount.setText("Giá sản phẩm : " + totalBill + " đ");
+//        }
+//    };
 //}

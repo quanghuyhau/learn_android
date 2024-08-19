@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.atomi.R;
+import com.example.atomi.adapter.MyAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
