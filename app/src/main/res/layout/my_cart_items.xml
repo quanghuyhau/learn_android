@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Ngày hiện tại: "
+                android:text="Ngày đặt hàng: "
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Ngày hiện tại: "
+                android:text="Ngày đặt hàng: "
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Thời gian hiện tại: "
+                android:text="Thời gian đặt hàng: "
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Thời gian hiện tại: "
+                android:text="Thời gian đặt hàng: "
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -149,7 +149,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Tổng số lượng  "
+                android:text="Số lượng sản phẩm  "
                 android:textSize="16sp"
                 android:textStyle="bold" />
 

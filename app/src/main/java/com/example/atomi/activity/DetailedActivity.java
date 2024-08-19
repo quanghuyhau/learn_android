@@ -74,7 +74,7 @@ public class  DetailedActivity extends AppCompatActivity {
         description = findViewById(R.id.detailed_desciption);
         price = findViewById(R.id.detailed_price);
         addToCart = findViewById(R.id.add_to_cart);
-        buyNow = findViewById(R.id.buy_now);
+//        buyNow = findViewById(R.id.buy_now);
         addItems = findViewById(R.id.add_item);
         remoteItems = findViewById(R.id.remote_item);
         seeMore = findViewById(R.id.detailed_see_more);
