@@ -16,7 +16,12 @@ import com.example.atomi.adapter.MyCartAdapter
 import com.example.atomi.models.MyCartModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.NumberFormat
+import java.util.Locale
+
 class CartActivity : AppCompatActivity() {
+
+
 
     private var overAllTotalAmount: Int = 0
     private lateinit var overAllAmount: TextView
@@ -37,6 +42,12 @@ class CartActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.my_cart_tool_bar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        toolbar.setNavigationIcon(R.drawable.ic_back)
+        toolbar.navigationIcon?.setTint(resources.getColor(R.color.white))
+        toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
 
         overAllAmount = findViewById(R.id.all_price)
         recyclerView = findViewById(R.id.cart_rec)
@@ -59,9 +70,13 @@ class CartActivity : AppCompatActivity() {
                         }
                     }
                     cartAdapter.notifyDataSetChanged()
-                    overAllAmount.text = "Giá sản phẩm : $overAllTotalAmount đ"
+
+                    val formattedTotalAmount = NumberFormat.getNumberInstance(Locale.US).format(overAllTotalAmount)
+
+                    overAllAmount.text = "Tổng đơn hàng : $formattedTotalAmount đ"
                 }
             }
+
     }
 
 //    private val mMessageReceiver: BroadcastReceiver = object : BroadcastReceiver() {
