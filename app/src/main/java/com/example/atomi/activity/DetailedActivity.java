@@ -87,7 +87,7 @@ public class  DetailedActivity extends AppCompatActivity {
             rating.setText(String.valueOf(newsProductModel.getRating()));
 
 
-            String priceString = newsProductModel.getPrice().replace(".", "");
+            String priceString = newsProductModel.getPrice().replace(",", "");
             try {
                 int price = Integer.parseInt(priceString);
                 totalPrice = price * totalQuantity;
@@ -116,7 +116,7 @@ public class  DetailedActivity extends AppCompatActivity {
             price.setText(String.valueOf(allProductModel.getPrice()));
             rating.setText(String.valueOf(allProductModel.getRating()));
 
-            String priceString = allProductModel.getPrice().replace(".", "");
+            String priceString = allProductModel.getPrice().replace(",", "");
             try {
                 int price = Integer.parseInt(priceString);
                 totalPrice = price * totalQuantity;
@@ -222,7 +222,7 @@ public class  DetailedActivity extends AppCompatActivity {
             quantity.setText(String.valueOf(totalQuantity));
 
             if (newsProductModel != null){
-                String priceString = newsProductModel.getPrice().replace(".", "");
+                String priceString = newsProductModel.getPrice().replace(",", "");
                 try {
                     int price = Integer.parseInt(priceString);
                     totalPrice = price * totalQuantity;
@@ -230,7 +230,7 @@ public class  DetailedActivity extends AppCompatActivity {
             }
         }
             if (allProductModel != null){
-                String priceString = allProductModel.getPrice().replace(".", "");
+                String priceString = allProductModel.getPrice().replace(",", "");
                 try {
                     int price = Integer.parseInt(priceString);
                     totalPrice = price * totalQuantity;

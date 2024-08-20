@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         readableBottomBar = findViewById(R.id.readableBottomBar);
 
 
+
         toolbar = findViewById(R.id.home_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -107,19 +108,25 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuItem cartItem = menu.findItem(R.id.menu_cart);
         getMenuInflater().inflate(R.menu.main_menu,menu);
+
         return  true;
+
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.menu_logout) {
-            auth.signOut();
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-            finish();
+//        if (id == R.id.menu_logout) {
+//            auth.signOut();
+//            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+//            finish();
+//
+//        } else
 
-        } else if (id == R.id.menu_cart) {
+        if (id == R.id.menu_cart) {
             startActivity(new Intent(MainActivity.this, CartActivity.class));
         }
         return true;

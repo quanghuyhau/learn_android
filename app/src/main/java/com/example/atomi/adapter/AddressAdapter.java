@@ -17,7 +17,6 @@ import java.util.List;
 
 public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHolder> {
 
-
     Context context;
     List<AddressModel> addressModelList;
     SelectedAddress selectedAddress;
@@ -32,47 +31,56 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.address_item,parent,false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.address_item, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull AddressAdapter.ViewHolder holder, int position) {
-        holder.address.setText(addressModelList.get(position).getUserAddress());
+        AddressModel addressModel = addressModelList.get(position);
+        holder.address.setText(addressModel.getUserAddress());
+
+        boolean isSelected = addressModel.isSelected() != null ? addressModel.isSelected() : false;
+        holder.radioButton.setChecked(isSelected);
+
         holder.radioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (AddressModel address:addressModelList){
+                for (AddressModel address : addressModelList) {
                     address.setSelected(false);
                 }
-                addressModelList.get(position).setSelected(true);
+                addressModel.setSelected(true);
+                notifyDataSetChanged();
 
-                if (selectedRadioBtn!= null){
-                    selectedRadioBtn.setSelected(false);
+                if (selectedRadioBtn != null) {
+                    selectedRadioBtn.setChecked(false);
                 }
                 selectedRadioBtn = (RadioButton) v;
-                selectedRadioBtn.setSelected(true);
-                selectedAddress.setAddress(addressModelList.get(position).getUserAddress());
+                selectedRadioBtn.setChecked(true);
+
+                selectedAddress.setAddress(addressModel.getUserAddress());
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
         return addressModelList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView address;
         RadioButton radioButton;
-        public ViewHolder(@NonNull View itemView){
+
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             address = itemView.findViewById(R.id.address_add);
             radioButton = itemView.findViewById(R.id.select_address);
         }
     }
 
-    public interface SelectedAddress{
+    public interface SelectedAddress {
         void setAddress(String address);
     }
 }
