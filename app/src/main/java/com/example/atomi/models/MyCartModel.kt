@@ -3,6 +3,7 @@ package com.example.atomi.models
 
 
 data class MyCartModel(
+    var documentId: String = "",
     var currentTime: String? = null,
     var currentDate: String? = null,
     var productName: String? = null,

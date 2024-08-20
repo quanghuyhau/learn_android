@@ -4,4 +4,11 @@
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
+    <style name="CustomButtonTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="buttonStyle">@style/CustomButton</item>
+    </style>
+    <style name="CustomButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@null</item> <!-- Disables Material's background tint -->
+        <item name="android:background">?android:attr/selectableItemBackground</item> <!-- Prevent default ripple -->
+    </style>
 </resources>

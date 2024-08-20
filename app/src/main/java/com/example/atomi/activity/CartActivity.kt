@@ -5,10 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.atomi.R
@@ -38,7 +40,6 @@ class CartActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
-
         toolbar = findViewById(R.id.my_cart_tool_bar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -46,8 +47,15 @@ class CartActivity : AppCompatActivity() {
         toolbar.setNavigationIcon(R.drawable.ic_back)
         toolbar.navigationIcon?.setTint(resources.getColor(R.color.white))
         toolbar.setNavigationOnClickListener {
-            onBackPressed()
+            finish()
         }
+
+        val addAddressBtn: Button = findViewById(R.id.add_to_cart)
+
+        addAddressBtn.setOnClickListener {
+            startActivity(Intent(this@CartActivity, AddressActivity::class.java))
+        }
+
 
         overAllAmount = findViewById(R.id.all_price)
         recyclerView = findViewById(R.id.cart_rec)
@@ -64,6 +72,7 @@ class CartActivity : AppCompatActivity() {
                     cartModelList.clear()
                     task.result?.documents?.forEach { doc ->
                         val myCartModel = doc.toObject(MyCartModel::class.java)
+                        myCartModel?.documentId = doc.id
                         myCartModel?.let {
                             cartModelList.add(it)
                             overAllTotalAmount += it.totalPrice ?: 0
@@ -76,6 +85,7 @@ class CartActivity : AppCompatActivity() {
                     overAllAmount.text = "Tổng đơn hàng : $formattedTotalAmount đ"
                 }
             }
+
 
     }
 

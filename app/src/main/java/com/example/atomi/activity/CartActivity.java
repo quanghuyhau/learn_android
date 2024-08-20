@@ -5,6 +5,8 @@
 //import android.content.Intent;
 //import android.content.IntentFilter;
 //import android.os.Bundle;
+//import android.view.View;
+//import android.widget.Button;
 //import android.widget.TextView;
 //
 //import androidx.activity.EdgeToEdge;
@@ -40,6 +42,7 @@
 //    RecyclerView recyclerView;
 //    List<MyCartModel> cartModelList;
 //    MyCartAdapter cartAdapter;
+//    Button addAddressBtn;
 //    private FirebaseAuth auth;
 //    private FirebaseFirestore firestore;
 //
@@ -53,6 +56,7 @@
 //        firestore = FirebaseFirestore.getInstance();
 //
 //        toolbar = findViewById(R.id.my_cart_tool_bar);
+//        addAddressBtn = findViewById(R.id.add_to_cart);
 //        setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //
@@ -64,6 +68,14 @@
 //        cartModelList = new ArrayList<>();
 //        cartAdapter = new MyCartAdapter(this, cartModelList);
 //        recyclerView.setAdapter(cartAdapter);
+//
+//
+//        addAddressBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(CartActivity.this, AddressActivity.class));
+//            }
+//        });
 //
 //
 //        firestore.collection("AddToCart").document(auth.getCurrentUser().getUid()).
