@@ -9,6 +9,8 @@ import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -30,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordInputSi;
     private TextView buttonSignin;
     private TextView create_account;
+    private FrameLayout gg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +50,21 @@ public class LoginActivity extends AppCompatActivity {
         passwordInputSi = findViewById(R.id.password_si);
         buttonSignin = findViewById(R.id.button_signin);
         create_account = findViewById(R.id.create_account);
+        gg = findViewById(R.id.google);
+
         passwordInputSi.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
         buttonSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 clickLogin();
+            }
+        });
+
+        gg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this,OnBoardingActivity.class));
             }
         });
 
@@ -87,19 +100,34 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             FirebaseUser user = auth.getCurrentUser();
 
-                            String userEmail = user.getEmail();
-                            String userUid = user.getUid();
+                            if (user != null) {
+                                user.getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<GetTokenResult> task) {
+                                        if (task.isSuccessful()) {
+                                            String idToken = task.getResult().getToken();
+                                            Log.d(TAG, "ID Token của người dùng là: " + idToken);
+                                        } else {
+                                            Log.e(TAG, "Error getting ID Token", task.getException());
+                                        }
+                                    }
+                                });
 
-                            Log.d(TAG, " ID của người dùng là: " + userUid);
-                            Log.d(TAG, " Email của người dùng là : " + user);
+                                String userEmail = user.getEmail();
+                                String userUid = user.getUid();
 
-                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            finish();
+                                Log.d(TAG, "ID của người dùng là: " + userUid);
+                                Log.d(TAG, "Email của người dùng là: " + userEmail);
+
+                                Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                finish();
+                            }
                         } else {
                             Toast.makeText(LoginActivity.this, "Đăng nhập thất bại: " + task.getException(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
+
 }

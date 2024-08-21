@@ -11,4 +11,9 @@
         <item name="backgroundTint">@null</item> <!-- Disables Material's background tint -->
         <item name="android:background">?android:attr/selectableItemBackground</item> <!-- Prevent default ripple -->
     </style>
+    
+    
+    <style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
+
+    </style>
 </resources>
