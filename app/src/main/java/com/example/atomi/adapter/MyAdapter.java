@@ -1,5 +1,7 @@
 package com.example.atomi.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.atomi.R;
+import com.example.atomi.activity.ChangePasswordActivity;
 import com.example.atomi.activity.DataHome;
 
 import java.util.List;
@@ -55,6 +58,17 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             itemViewHolder.imageView.setImageResource(dataHome.getDataImage());
             itemViewHolder.textView.setText(dataHome.getDataTitle());
             itemViewHolder.subTextView.setText(dataHome.getDataSubTitle());
+
+            if ("Cài đặt mật khẩu".equals(dataHome.getDataTitle())) {
+                itemViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Context context = v.getContext();
+                        Intent intent = new Intent(context, ChangePasswordActivity.class);
+                        context.startActivity(intent);
+                    }
+                });
+            }
         }
     }
 

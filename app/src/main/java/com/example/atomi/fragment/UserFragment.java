@@ -17,6 +17,7 @@ import com.example.atomi.activity.DataHome;
 import com.example.atomi.activity.LoginActivity;
 import com.example.atomi.adapter.MyAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ import java.util.List;
 public class UserFragment extends Fragment {
     private RecyclerView recyclerView;
     private TextView buttonLogOut;
-
+    private TextView emailTextView;
     private FirebaseAuth Auth;
 
     @Override
@@ -35,11 +36,18 @@ public class UserFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recycleView_fra);
         buttonLogOut = view.findViewById(R.id.button_logout_fra);
+        emailTextView = view.findViewById(R.id.email_user);
 
 
 
         Auth = FirebaseAuth.getInstance();
         TextView logoutButton = view.findViewById(R.id.button_logout_fra);
+
+        FirebaseUser user = Auth.getCurrentUser();
+        if (user != null) {
+            String email = user.getEmail();
+            emailTextView.setText(email);
+        }
 
         List<DataHome> dataHomes = new ArrayList<>();
         dataHomes.add(new DataHome(DataHome.TYPE_HEADER, 0, "Thông tin tài khoản", ""));

@@ -8,16 +8,29 @@
     android:orientation="vertical"
     tools:context=".activity.OnBoardingActivity">
 
-    <TextView
-        android:id="@+id/skipTextView"
+    <LinearLayout
+        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="327dp"
-        android:layout_marginTop="41dp"
-        android:fontFamily="@font/popin_semibold"
-        android:text="Skip"
-        android:textColor="#D7D7D7"
-        android:textSize="18sp" />
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:layout_marginLeft="10dp"
+            android:id="@+id/switchMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             />
+
+        <TextView
+            android:id="@+id/skipTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="270dp"
+            android:fontFamily="@font/popin_semibold"
+            android:text="Skip"
+            android:textColor="#D7D7D7"
+            android:textSize="18sp" />
+    </LinearLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
@@ -32,7 +45,7 @@
         android:layout_height="18dp"
         android:layout_gravity="center"
         android:layout_marginTop="17dp"
-        app:ci_drawable="@drawable/bg_indicator"
+        app:ci_drawable="@drawable/borderob"
 
         />
 
