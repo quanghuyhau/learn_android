@@ -4,4 +4,8 @@
         <attr name="toolbarBackgroundColor" format="color" />
         <attr name="toolbarTitleColor" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="CustomEditText">
+        <attr name="togglePasswordVisibility" format="boolean"/>
+    </declare-styleable>
 </resources>

@@ -7,11 +7,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,6 +77,44 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
+    public void togglePasswordVisibilitya(View view) {
+        int inputType = passwordInputSu.getInputType();
+        if (inputType ==(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD)) {
+            inputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
+        } else {
+            inputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
+        }
+        passwordInputSu.setInputType(inputType);
+        passwordInputSu.setSelection(passwordInputSu.getText().length());
+
+        int iconResId;
+        if (inputType == (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD)) {
+            iconResId = R.drawable.pass2;
+        } else {
+            iconResId = R.drawable.pass;
+        }
+        ImageView imageView = findViewById(R.id.show_su);
+        imageView.setImageResource(iconResId);
+    }
+    public void togglePasswordVisibilitys(View view) {
+        int inputType = passwordInputSu.getInputType();
+        if (inputType ==(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD)) {
+            inputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
+        } else {
+            inputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
+        }
+        confirmPasswordInputSu.setInputType(inputType);
+        confirmPasswordInputSu.setSelection(confirmPasswordInputSu.getText().length());
+
+        int iconResId;
+        if (inputType == (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD)) {
+            iconResId = R.drawable.pass2;
+        } else {
+            iconResId = R.drawable.pass;
+        }
+        ImageView imageView = findViewById(R.id.show_pass_cf_su);
+        imageView.setImageResource(iconResId);
+    }
     private void clickSignUp() {
         String userName = nameInputSu.getText().toString();
         String userEmail = emailInputSu.getText().toString().trim();

@@ -2,11 +2,15 @@ package com.example.atomi.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.text.TextUtils
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
+import android.view.MotionEvent
+import android.view.View
 import android.widget.EditText
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +19,8 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GetTokenResult
+
+// LoginActivity.kt
 
 class LoginActivity : AppCompatActivity() {
 
@@ -45,18 +51,33 @@ class LoginActivity : AppCompatActivity() {
         passwordInputSi.transformationMethod = PasswordTransformationMethod.getInstance()
 
         buttonSignin.setOnClickListener { clickLogin() }
-
         gg.setOnClickListener {
             startActivity(Intent(this@LoginActivity, OnBoardingActivity::class.java))
         }
-
         createAccount.setOnClickListener {
             startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
         }
-
         forgotPassword.setOnClickListener {
             startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
         }
+    }
+
+     fun togglePasswordVisibility(view: View) {
+        val inputType = if (passwordInputSi.inputType == (InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD)) {
+            InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+        } else {
+            InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+        }
+        passwordInputSi.inputType = inputType
+        passwordInputSi.setSelection(passwordInputSi.text.length)
+
+        val iconResId = if (inputType == (InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD)) {
+            R.drawable.pass2
+        } else {
+            R.drawable.pass
+        }
+        val imageView = findViewById<ImageView>(R.id.show_pass_btn)
+        imageView.setImageResource(iconResId)
     }
 
     private fun clickLogin() {
@@ -86,7 +107,7 @@ class LoginActivity : AppCompatActivity() {
                             val idToken = tokenTask.result?.token
                             Log.d(TAG, "ID Token của người dùng là: $idToken")
                         } else {
-                            Log.e(TAG, "ko lấy được ID Token", tokenTask.exception)
+                            Log.e(TAG, "Không lấy được ID Token", tokenTask.exception)
                         }
                     }
 
@@ -111,3 +132,4 @@ class LoginActivity : AppCompatActivity() {
         private const val TAG = "LoginActivity"
     }
 }
+

@@ -8,13 +8,14 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/payment_toolbar"
-        android:background="#8FF7FD"
+        android:background="@color/primary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/white"
         app:title="Thanh toán đơn hàng"/>
 
 
@@ -103,7 +104,7 @@
         app:layout_constraintTop_toBottomOf="@+id/divider5" />
 
     <Button
-        android:id="@+id/pay_btn"
+        android:id="@+id/buy_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"

@@ -17,11 +17,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 android:gravity="center"
                 android:paddingTop="100dp"
                 android:paddingBottom="6dp"
                 android:text="Tạo tài khoản"
-                android:layout_marginBottom="20dp"
                 android:textColor="#1F41BB"
                 android:textSize="30sp"
                 android:textStyle="bold" />
@@ -39,6 +39,7 @@
                 android:padding="20dp"
                 android:textColorHint="#626262"
                 android:textSize="16sp" />
+
             <EditText
                 android:id="@+id/email_su"
                 android:layout_width="match_parent"
@@ -56,32 +57,63 @@
                 android:textColorHint="#626262"
                 android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/password_su"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="31dp"
-                android:layout_marginRight="31dp"
-                android:layout_marginBottom="26dp"
-                android:background="@drawable/edit_text_background"
-                android:hint="Mật khẩu"
-                android:inputType="textPassword"
-                android:padding="20dp"
-                android:textColorHint="#626262"
-                android:textSize="16sp" />
-            <EditText
-                android:id="@+id/confirm_password_su"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/password_su"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="31dp"
+                    android:layout_marginRight="31dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/edit_text_background"
+                    android:hint="Mật khẩu"
+                    android:inputType="textPassword"
+                    android:padding="20dp"
+                    android:textColorHint="#626262"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/show_su"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="50dp"
+                    android:onClick="togglePasswordVisibilitya"
+                    android:src="@drawable/pass" />
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="31dp"
-                android:layout_marginRight="31dp"
-                android:layout_marginBottom="26dp"
-                android:background="@drawable/edit_text_background"
-                android:hint="Nhập lại mật khẩu"
-                android:inputType="textPassword"
-                android:padding="20dp"
-                android:textColorHint="#626262"
-                android:textSize="16sp" />
+                android:layout_marginBottom="30dp"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/confirm_password_su"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="31dp"
+                    android:layout_marginRight="31dp"
+                    android:background="@drawable/edit_text_background"
+                    android:hint="Nhập lại mật khẩu"
+                    android:inputType="textPassword"
+                    android:padding="20dp"
+                    android:textColorHint="#626262"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/show_pass_cf_su"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="50dp"
+                    android:onClick="togglePasswordVisibilitys"
+                    android:src="@drawable/pass" />
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/button_signup"
@@ -98,6 +130,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/have_account"
                 android:layout_width="wrap_content"

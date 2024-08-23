@@ -29,7 +29,7 @@ class ChangePasswordActivity : AppCompatActivity() {
 
         oldPasswordInput = findViewById(R.id.pass_old)
         newPasswordInput = findViewById(R.id.pass_new)
-        confirmPasswordInput = findViewById(R.id.change_passnew)
+        confirmPasswordInput = findViewById(R.id.change_pass_new)
         changePasswordButton = findViewById(R.id.change_pass)
 
         oldPasswordInput.transformationMethod = PasswordTransformationMethod.getInstance()
@@ -41,6 +41,8 @@ class ChangePasswordActivity : AppCompatActivity() {
             changePassword()
         }
     }
+
+
 
     private fun changePassword() {
         val oldPassword = oldPasswordInput.text.toString().trim()
